@@ -1,3 +1,5 @@
+import pandas as pd
+
 from scraper import NewsScraper
 from config import configure_driver
 
@@ -15,9 +17,6 @@ rosatom.scrape_full()
 
 print(rosatom.news[0]['text'])
 
+results = pd.DataFrame(rosatom.news)
 
-
-
-with open("search_res.txt", 'w', encoding="utf-8") as file:
-    for n in rosatom.news:
-        file.write(str(n['title']) + ';' + str(n['url']) + ';' + str(n['text']) + ';' + '\n')
+results.to_csv('search_res.csv')
